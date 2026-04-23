@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="history-header">
+    <h2>Data History</h2>
+    <div class="history-actions">
+        <a href="{{ url_for('export_pdf') }}" class="btn-outline-sm">📄 Export PDF</a>
+        
+        <form action="{{ url_for('upload_csv') }}" method="POST" enctype="multipart/form-data" class="inline-form" id="csvForm">
+            <input type="file" name="csv_file" accept=".csv" id="csvFile" style="display: none;" onchange="document.getElementById('csvForm').submit();">
+            <button type="button" class="btn-primary-sm" onclick="document.getElementById('csvFile').click();">
+                📁 Import CSV
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="table-container glass-card mt-3">
+    {% if logs %}
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Score</th>
+                <th>Steps</th>
+                <th>Sleep</th>
+                <th>BP</th>
+                <th>HR</th>
+                <th>Weight</th>
+                <th>Water</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td><strong>{{ log.date }}</strong></td>
+                <td>
+                    <span class="badge score-badge {% if log.score > 75 %}high{% elif log.score > 40 %}med{% else %}low{% endif %}">
+                        {{ log.score }}
+                    </span>
+                </td>
+                <td>{{ log.steps }}</td>
+                <td>{{ log.sleep_hours }} h</td>
+                <td>{{ log.bp_systolic }}/{{ log.bp_diastolic }}</td>
+                <td>{{ log.heart_rate }} bpm</td>
+                <td>{{ log.weight }} kg</td>
+                <td>{{ log.water_intake }} L</td>
+                <td class="actions-cell">
+                    <a href="{{ url_for('edit_log', log_id=log.id) }}" class="btn-icon">✏️</a>
+                    <form action="{{ url_for('delete_log', log_id=log.id) }}" method="POST" class="inline-form" onsubmit="return confirm('Delete this entry?');">
+                        <button type="submit" class="btn-icon delete">🗑️</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+        <p>No health data logged yet.</p>
+        <a href="{{ url_for('add_log') }}" class="btn-primary mt-2">Log Your First Entry</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
