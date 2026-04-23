@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Health Monitoring System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Health Monitor</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+            <li><a href="add-data.html">Add Health Data</a></li>
+            <li><a href="history.html">History</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+        <div class="logout-btn">
+            <a onclick="logout()">Logout</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="page-header">
+            <h1>Dashboard</h1>
+        </div>
+
+        <div class="alerts-container" id="alerts-container">
+            <h3>Critical Alerts</h3>
+            <ul id="alerts-list"></ul>
+        </div>
+
+        <div class="dashboard-cards">
+            <div class="card green">
+                <h3>Health Score</h3>
+                <div class="value" id="health-score">Loading...</div>
+            </div>
+            <div class="card yellow">
+                <h3>Latest Heart Rate</h3>
+                <div class="value" id="heart-rate">Loading...</div>
+            </div>
+            <div class="card green">
+                <h3>Latest Steps</h3>
+                <div class="value" id="steps">Loading...</div>
+            </div>
+            <div class="card yellow">
+                <h3>Latest Sleep</h3>
+                <div class="value" id="sleep">Loading...</div>
+            </div>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-card">
+                <canvas id="hrChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <canvas id="sleepChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

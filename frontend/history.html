@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History - Health Monitoring System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Health Monitor</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="add-data.html">Add Health Data</a></li>
+            <li><a href="history.html" class="active">History</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+        <div class="logout-btn">
+            <a onclick="logout()">Logout</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="page-header">
+            <h1>Health Data History</h1>
+            <select id="history-filter" class="form-group" style="width: auto; padding: 5px 10px;">
+                <option value="7">Last 7 Days</option>
+                <option value="30" selected>Last 30 Days</option>
+            </select>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Heart Rate</th>
+                        <th>Steps</th>
+                        <th>Sleep</th>
+                        <th>Calories</th>
+                    </tr>
+                </thead>
+                <tbody id="history-body">
+                    <!-- Data populated via JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
