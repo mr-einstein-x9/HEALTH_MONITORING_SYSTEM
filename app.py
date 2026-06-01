@@ -10,7 +10,7 @@ from engine import compute_score
 from alerts import generate_alerts, check_missing_data, calculate_baseline
 from utils import parse_csv, calculate_streak, generate_pdf_report
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates", static_folder="static")
 app.config['SECRET_KEY'] = 'dev_secret_key_123'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -37,9 +37,9 @@ with app.app_context():
 
 # ── Auth Routes ─────────────────────────────────────────────────────────────
 
-@app.route("/")
-def home():
-    return redirect(url_for("login"))
+@app.route('/test')
+def test():
+    return "Render is working"
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -103,7 +103,7 @@ def logout():
 # ── Dashboard & Data Routes ─────────────────────────────────────────────────
 
 @app.route('/')
-def index():
+def home():
     if 'user_id' in session:
         return redirect(url_for('dashboard'))
     return redirect(url_for('login'))
